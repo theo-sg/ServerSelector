@@ -8,7 +8,7 @@ def menu():
     system("cls")
     global select
     for i in range(1, 5):
-        print("{1} {0}. Do {0} {2}".format(i, ">" if select == i else " ", "<" if select == i else " "))
+        print("{0}. {1} \t{2}".format(i, "option", "<<" if select == i else " "))
 
 def up():
     global select
@@ -26,8 +26,13 @@ def down():
         select += 1
     menu()
 
+def enter():
+	global select
+	print("{0} selected".format(select))
+
 menu()
 add_hotkey('up', up)
 add_hotkey('down', down)
+add_hotkey('enter', enter)
 wait()
 

@@ -44,13 +44,17 @@ def listServers():
     for x in data:
         s = x.split(';')
         servers.append(Server(s[0], s[1], s[2]))
-    for s in servers:
-        print((s.name, s.version, s.description))
     f.close()
 
 def writeModifiedBatch(u, v, w):    #where u = username, v = ip and w = name (assuming path == name)
     f = open("Start Remote Server.bat", "w")
     f.write("ssh -t {0}@{1} \"cd ~/Desktop/Minecraft/{2} && ./run.sh\"".format(u, v, w))
+    f.close()
+    f = open("Save Remote Server.bat", "w")
+    f.write("ssh -t {0}@{1} \"cd ~/Desktop/Minecraft/{2} && ./save.sh\"".format(u, v, w))
+    f.close()
+    f = open("Stop Remote Server.bat", "w")
+    f.write("ssh -t {0}@{1} \"cd ~/Desktop/Minecraft/{2} && ./stop.sh\"".format(u, v, w))
     f.close()
             
 def menu():
@@ -58,7 +62,7 @@ def menu():
     global select
     global servers
     for i in range(0, length):
-        print("{0}:\t {1} \t\t{2}".format(i+1, servers[i].name, "<<<" if select == i else " "))
+        print("{0}\t{1}:\t {2}".format(">>>" if select == i else " ", i+1, servers[i].name))
 
 def up():
     global select
